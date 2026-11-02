@@ -1,6 +1,12 @@
 // @ts-nocheck — imported from another project with looser type settings
 import { supabase } from '@/lib/local-app-state';
+// Agents share one store with the Admission > Agents page (sales-store), so an
+// agent created in either place shows up in both.
+import { getSalesState, salesActions, type Agent as SalesAgent } from '@/lib/sales-store';
 import type { LeadStatus } from './lead-outcomes';
+
+const toAgent = (a: SalesAgent): Agent => ({ id: a.id, full_name: a.name, email: a.email, created_at: a.joined, roles: ['agent'] });
+const sharedAgents = () => getSalesState().agents.map(toAgent);
 
 export const KEY = 'edusphere.sales.call-center.v1';
 export type Agent = { id: string; full_name: string; email: string; created_at: string; roles: string[] };
