@@ -35,10 +35,10 @@ export function change<T>(fn: (state: State) => T): Promise<T> {
 }
 export const listAllLeads = async () => (await read()).leads;
 export const listMyLeads = async () => (await read()).leads.filter(l => !selectedAgent || !l.assigned_to || l.assigned_to === selectedAgent);
-export const listAgents = async () => (await read()).agents;
+export const listAgents = async () => sharedAgents();
 export async function addAgent(input: { name: string; email: string }) {
   if (!input.name.trim()) throw new Error('Enter an agent name.');
-  return change(s => { s.agents.push({ id: crypto.randomUUID(), full_name: input.name.trim(), email: input.email.trim(), roles: ['agent'], created_at: new Date().toISOString() }); });
+  salesActions.addAgent({ name: input.name.trim(), email: input.email.trim(), phone: '', team: 'Inside Sales' });
 }
 export async function bulkInsertLeads({ data }: { data: { leads: { name: string; phone?: string | null; email?: string | null; source?: string | null; notes?: string | null }[] } }) {
   return change(s => {
