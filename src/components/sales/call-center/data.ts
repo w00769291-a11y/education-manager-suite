@@ -84,7 +84,7 @@ export async function getAnalytics() {
 // Agent share link: agent sees only leads the admin assigned to them and records a reason/outcome.
 export async function getAgentLinkData(agentId: string) {
   const s = await read();
-  const agent = s.agents.find(a => a.id === agentId) ?? null;
+  const agent = sharedAgents().find(a => a.id === agentId) ?? null;
   return { agent, leads: agent ? s.leads.filter(l => l.assigned_to === agentId) : [] };
 }
 export const submitAgentReason = ({ data }: { data: { agentId: string; leadId: string; status: LeadStatus; reason: string } }) => change(s => {
