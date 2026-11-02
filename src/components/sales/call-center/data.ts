@@ -1,6 +1,12 @@
 // @ts-nocheck — imported from another project with looser type settings
 import { supabase } from '@/lib/local-app-state';
+// Agents share one store with the Admission > Agents page (sales-store), so an
+// agent created in either place shows up in both.
+import { getSalesState, salesActions, type Agent as SalesAgent } from '@/lib/sales-store';
 import type { LeadStatus } from './lead-outcomes';
+
+const toAgent = (a: SalesAgent): Agent => ({ id: a.id, full_name: a.name, email: a.email, created_at: a.joined, roles: ['agent'] });
+const sharedAgents = () => getSalesState().agents.map(toAgent);
 
 export const KEY = 'edusphere.sales.call-center.v1';
 export type Agent = { id: string; full_name: string; email: string; created_at: string; roles: string[] };
@@ -29,10 +35,10 @@ export function change<T>(fn: (state: State) => T): Promise<T> {
 }
 export const listAllLeads = async () => (await read()).leads;
 export const listMyLeads = async () => (await read()).leads.filter(l => !selectedAgent || !l.assigned_to || l.assigned_to === selectedAgent);
-export const listAgents = async () => (await read()).agents;
+export const listAgents = async () => sharedAgents();
 export async function addAgent(input: { name: string; email: string }) {
   if (!input.name.trim()) throw new Error('Enter an agent name.');
-  return change(s => { s.agents.push({ id: crypto.randomUUID(), full_name: input.name.trim(), email: input.email.trim(), roles: ['agent'], created_at: new Date().toISOString() }); });
+  salesActions.addAgent({ name: input.name.trim(), email: input.email.trim(), phone: '', team: 'Inside Sales' });
 }
 export async function bulkInsertLeads({ data }: { data: { leads: { name: string; phone?: string | null; email?: string | null; source?: string | null; notes?: string | null }[] } }) {
   return change(s => {
@@ -44,11 +50,11 @@ export async function bulkInsertLeads({ data }: { data: { leads: { name: string;
 export const assignLead = ({ data }: { data: { leadId: string; agentId: string | null } }) => change(s => {
   const lead = s.leads.find(l => l.id === data.leadId);
   if (!lead) throw new Error('Lead not found.');
-  if (data.agentId && !s.agents.some(a => a.id === data.agentId)) throw new Error('Agent not found.');
+  if (data.agentId && !getSalesState().agents.some(a => a.id === data.agentId)) throw new Error('Agent not found.');
   lead.assigned_to = data.agentId; lead.updated_at = new Date().toISOString(); return { ok: true };
 });
 export const autoAssignUnassigned = ({ data }: { data: { agentId: string } }) => change(s => {
-  if (!s.agents.some(a => a.id === data.agentId)) throw new Error('Agent not found.');
+  if (!getSalesState().agents.some(a => a.id === data.agentId)) throw new Error('Agent not found.');
   const leads = s.leads.filter(l => !l.assigned_to); leads.forEach(l => { l.assigned_to = data.agentId; l.updated_at = new Date().toISOString(); }); return { count: leads.length };
 });
 export const deleteLead = ({ data }: { data: { leadId: string } }) => change(s => { s.leads = s.leads.filter(l => l.id !== data.leadId); return { ok: true }; });
@@ -63,13 +69,14 @@ export const logLeadCall = ({ data }: { data: { leadId: string } }) => change(s 
 });
 export type ReportRow = Lead & { assigned_name: string | null };
 export async function listReportLeads({ data }: { data: { from?: string | null; to?: string | null; status?: string | null; agentId?: string | null; source?: string | null } }): Promise<ReportRow[]> {
-  const s = await read(); return s.leads.filter(l => (!data.from || l.created_at >= data.from) && (!data.to || l.created_at <= data.to) && (!data.status || l.status === data.status) && (!data.agentId || l.assigned_to === data.agentId) && (!data.source || l.source?.toLowerCase().includes(data.source.toLowerCase()))).map(l => ({ ...l, assigned_name: s.agents.find(a => a.id === l.assigned_to)?.full_name ?? null }));
+  const s = await read(); return s.leads.filter(l => (!data.from || l.created_at >= data.from) && (!data.to || l.created_at <= data.to) && (!data.status || l.status === data.status) && (!data.agentId || l.assigned_to === data.agentId) && (!data.source || l.source?.toLowerCase().includes(data.source.toLowerCase()))).map(l => ({ ...l, assigned_name: sharedAgents().find(a => a.id === l.assigned_to)?.full_name ?? null }));
 }
 export async function getAgentSummary() {
-  const s = await read(); return s.agents.map(a => { const leads = s.leads.filter(l => l.assigned_to === a.id); const count = (status: LeadStatus) => leads.filter(l => l.status === status).length; return { agentId: a.id, name: a.full_name, email: a.email, total: leads.length, new: count('new'), vv: count('vv'), '48': count('48'), will: count('will'), sd: count('sd'), parents: count('parents'), lc: count('lc'), nr: count('nr'), ni: count('ni') }; });
+  const s = await read(); return getSalesState().agents.map(a => { const leads = s.leads.filter(l => l.assigned_to === a.id); const count = (status: LeadStatus) => leads.filter(l => l.status === status).length; return { agentId: a.id, name: a.name, email: a.email, total: leads.length, new: count('new'), vv: count('vv'), '48': count('48'), will: count('will'), sd: count('sd'), parents: count('parents'), lc: count('lc'), nr: count('nr'), ni: count('ni') }; });
 }
 export async function getAnalytics() {
-  const { leads, agents } = await read();
+  const { leads } = await read();
+  const agents = sharedAgents();
   const counts = (key: 'status' | 'source') => { const map = new Map<string, number>(); leads.forEach(l => { const value = l[key] || 'Unknown'; map.set(value, (map.get(value) ?? 0) + 1); }); return [...map].map(([name, count]) => ({ name, count })); };
   const assigned = leads.filter(l => l.assigned_to).length;
   return { totals: { totalLeads: leads.length, assigned, unassigned: leads.length - assigned, workedRate: leads.length ? Math.round(leads.filter(l => l.status !== 'new').length / leads.length * 100) : 0 }, funnel: counts('status').map(v => ({ status: v.name, count: v.count })), sources: counts('source').map(v => ({ source: v.name, count: v.count })), perAgent: agents.map(a => { const rows = leads.filter(l => l.assigned_to === a.id); return { agentId: a.id, name: a.full_name, total: rows.length, contacted: rows.filter(l => l.status !== 'new').length }; }), trend: Array.from({ length: 30 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() - 29 + i); const date = d.toISOString().slice(0,10); return { date, created: leads.filter(l => l.created_at.slice(0,10) === date).length }; }) };
@@ -77,7 +84,7 @@ export async function getAnalytics() {
 // Agent share link: agent sees only leads the admin assigned to them and records a reason/outcome.
 export async function getAgentLinkData(agentId: string) {
   const s = await read();
-  const agent = s.agents.find(a => a.id === agentId) ?? null;
+  const agent = sharedAgents().find(a => a.id === agentId) ?? null;
   return { agent, leads: agent ? s.leads.filter(l => l.assigned_to === agentId) : [] };
 }
 export const submitAgentReason = ({ data }: { data: { agentId: string; leadId: string; status: LeadStatus; reason: string } }) => change(s => {

@@ -129,6 +129,10 @@ export function useSales() {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
+// Raw state access for non-React modules (e.g. the call-center data layer),
+// so agents added in Admission > Agents also appear in the Call Center.
+export const getSalesState = () => (typeof window === "undefined" ? seed : state);
+
 const nextId = (prefix: string, list: { id: string }[]) => {
   const nums = list
     .map((x) => parseInt(x.id.replace(/\D/g, ""), 10))
