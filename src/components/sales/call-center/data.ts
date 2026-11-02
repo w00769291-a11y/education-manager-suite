@@ -50,11 +50,11 @@ export async function bulkInsertLeads({ data }: { data: { leads: { name: string;
 export const assignLead = ({ data }: { data: { leadId: string; agentId: string | null } }) => change(s => {
   const lead = s.leads.find(l => l.id === data.leadId);
   if (!lead) throw new Error('Lead not found.');
-  if (data.agentId && !s.agents.some(a => a.id === data.agentId)) throw new Error('Agent not found.');
+  if (data.agentId && !getSalesState().agents.some(a => a.id === data.agentId)) throw new Error('Agent not found.');
   lead.assigned_to = data.agentId; lead.updated_at = new Date().toISOString(); return { ok: true };
 });
 export const autoAssignUnassigned = ({ data }: { data: { agentId: string } }) => change(s => {
-  if (!s.agents.some(a => a.id === data.agentId)) throw new Error('Agent not found.');
+  if (!getSalesState().agents.some(a => a.id === data.agentId)) throw new Error('Agent not found.');
   const leads = s.leads.filter(l => !l.assigned_to); leads.forEach(l => { l.assigned_to = data.agentId; l.updated_at = new Date().toISOString(); }); return { count: leads.length };
 });
 export const deleteLead = ({ data }: { data: { leadId: string } }) => change(s => { s.leads = s.leads.filter(l => l.id !== data.leadId); return { ok: true }; });
