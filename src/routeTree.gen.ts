@@ -10,33 +10,358 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AcademicRouteImport } from './routes/academic'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AdmissionRouteImport } from './routes/admission'
+import { Route as DirectorsRouteImport } from './routes/directors'
+import { Route as FinanceRouteImport } from './routes/finance'
+import { Route as HrRouteImport } from './routes/hr'
+import { Route as MarketingRouteImport } from './routes/marketing'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as WorkspaceRouteImport } from './routes/workspace'
+import { Route as AdmissionIndexRouteImport } from './routes/admission.index'
+import { Route as AdmissionAgentsRouteImport } from './routes/admission.agents'
+import { Route as AdmissionApplicationRouteImport } from './routes/admission.application'
+import { Route as AdmissionApplicationsRouteImport } from './routes/admission.applications'
+import { Route as AdmissionCallCenterRouteImport } from './routes/admission.call-center'
+import { Route as AdmissionFinanceRouteImport } from './routes/admission.finance'
+import { Route as AdmissionFormBuilderRouteImport } from './routes/admission.form-builder'
+import { Route as AdmissionLeadsRouteImport } from './routes/admission.leads'
+import { Route as AdmissionAgentsIndexRouteImport } from './routes/admission.agents.index'
+import { Route as AdmissionAgentsIdRouteImport } from './routes/admission.agents.$id'
+import { Route as AdmissionApplicationsIdRouteImport } from './routes/admission.applications.$id'
+import { Route as AdmissionCallCenterIndexRouteImport } from './routes/admission.call-center.index'
+import { Route as AdmissionCallCenterAgentsRouteImport } from './routes/admission.call-center.agents'
+import { Route as AdmissionCallCenterLeadsRouteImport } from './routes/admission.call-center.leads'
+import { Route as AdmissionCallCenterMyLeadsRouteImport } from './routes/admission.call-center.my-leads'
+import { Route as AdmissionCallCenterReportsRouteImport } from './routes/admission.call-center.reports'
+import { Route as AdmissionCallCenterUploadRouteImport } from './routes/admission.call-center.upload'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcademicRoute = AcademicRouteImport.update({
+  id: '/academic',
+  path: '/academic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionRoute = AdmissionRouteImport.update({
+  id: '/admission',
+  path: '/admission',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DirectorsRoute = DirectorsRouteImport.update({
+  id: '/directors',
+  path: '/directors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HrRoute = HrRouteImport.update({
+  id: '/hr',
+  path: '/hr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingRoute = MarketingRouteImport.update({
+  id: '/marketing',
+  path: '/marketing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkspaceRoute = WorkspaceRouteImport.update({
+  id: '/workspace',
+  path: '/workspace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionIndexRoute = AdmissionIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdmissionRoute,
+} as any)
+const AdmissionAgentsRoute = AdmissionAgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
+  getParentRoute: () => AdmissionRoute,
+} as any)
+const AdmissionApplicationRoute = AdmissionApplicationRouteImport.update({
+  id: '/application',
+  path: '/application',
+  getParentRoute: () => AdmissionRoute,
+} as any)
+const AdmissionApplicationsRoute = AdmissionApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => AdmissionRoute,
+} as any)
+const AdmissionCallCenterRoute = AdmissionCallCenterRouteImport.update({
+  id: '/call-center',
+  path: '/call-center',
+  getParentRoute: () => AdmissionRoute,
+} as any)
+const AdmissionFinanceRoute = AdmissionFinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => AdmissionRoute,
+} as any)
+const AdmissionFormBuilderRoute = AdmissionFormBuilderRouteImport.update({
+  id: '/form-builder',
+  path: '/form-builder',
+  getParentRoute: () => AdmissionRoute,
+} as any)
+const AdmissionLeadsRoute = AdmissionLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => AdmissionRoute,
+} as any)
+const AdmissionAgentsIndexRoute = AdmissionAgentsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdmissionAgentsRoute,
+} as any)
+const AdmissionAgentsIdRoute = AdmissionAgentsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdmissionAgentsRoute,
+} as any)
+const AdmissionApplicationsIdRoute = AdmissionApplicationsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdmissionApplicationsRoute,
+} as any)
+const AdmissionCallCenterIndexRoute =
+  AdmissionCallCenterIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AdmissionCallCenterRoute,
+  } as any)
+const AdmissionCallCenterAgentsRoute =
+  AdmissionCallCenterAgentsRouteImport.update({
+    id: '/agents',
+    path: '/agents',
+    getParentRoute: () => AdmissionCallCenterRoute,
+  } as any)
+const AdmissionCallCenterLeadsRoute =
+  AdmissionCallCenterLeadsRouteImport.update({
+    id: '/leads',
+    path: '/leads',
+    getParentRoute: () => AdmissionCallCenterRoute,
+  } as any)
+const AdmissionCallCenterMyLeadsRoute =
+  AdmissionCallCenterMyLeadsRouteImport.update({
+    id: '/my-leads',
+    path: '/my-leads',
+    getParentRoute: () => AdmissionCallCenterRoute,
+  } as any)
+const AdmissionCallCenterReportsRoute =
+  AdmissionCallCenterReportsRouteImport.update({
+    id: '/reports',
+    path: '/reports',
+    getParentRoute: () => AdmissionCallCenterRoute,
+  } as any)
+const AdmissionCallCenterUploadRoute =
+  AdmissionCallCenterUploadRouteImport.update({
+    id: '/upload',
+    path: '/upload',
+    getParentRoute: () => AdmissionCallCenterRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/academic': typeof AcademicRoute
+  '/admin': typeof AdminRoute
+  '/admission': typeof AdmissionRouteWithChildren
+  '/directors': typeof DirectorsRoute
+  '/finance': typeof FinanceRoute
+  '/hr': typeof HrRoute
+  '/marketing': typeof MarketingRoute
+  '/settings': typeof SettingsRoute
+  '/workspace': typeof WorkspaceRoute
+  '/admission/agents': typeof AdmissionAgentsRouteWithChildren
+  '/admission/application': typeof AdmissionApplicationRoute
+  '/admission/applications': typeof AdmissionApplicationsRouteWithChildren
+  '/admission/call-center': typeof AdmissionCallCenterRouteWithChildren
+  '/admission/finance': typeof AdmissionFinanceRoute
+  '/admission/form-builder': typeof AdmissionFormBuilderRoute
+  '/admission/leads': typeof AdmissionLeadsRoute
+  '/admission/': typeof AdmissionIndexRoute
+  '/admission/agents/$id': typeof AdmissionAgentsIdRoute
+  '/admission/applications/$id': typeof AdmissionApplicationsIdRoute
+  '/admission/call-center/agents': typeof AdmissionCallCenterAgentsRoute
+  '/admission/call-center/leads': typeof AdmissionCallCenterLeadsRoute
+  '/admission/call-center/my-leads': typeof AdmissionCallCenterMyLeadsRoute
+  '/admission/call-center/reports': typeof AdmissionCallCenterReportsRoute
+  '/admission/call-center/upload': typeof AdmissionCallCenterUploadRoute
+  '/admission/agents/': typeof AdmissionAgentsIndexRoute
+  '/admission/call-center/': typeof AdmissionCallCenterIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/academic': typeof AcademicRoute
+  '/admin': typeof AdminRoute
+  '/directors': typeof DirectorsRoute
+  '/finance': typeof FinanceRoute
+  '/hr': typeof HrRoute
+  '/marketing': typeof MarketingRoute
+  '/settings': typeof SettingsRoute
+  '/workspace': typeof WorkspaceRoute
+  '/admission/application': typeof AdmissionApplicationRoute
+  '/admission/applications': typeof AdmissionApplicationsRouteWithChildren
+  '/admission/finance': typeof AdmissionFinanceRoute
+  '/admission/form-builder': typeof AdmissionFormBuilderRoute
+  '/admission/leads': typeof AdmissionLeadsRoute
+  '/admission': typeof AdmissionIndexRoute
+  '/admission/agents/$id': typeof AdmissionAgentsIdRoute
+  '/admission/applications/$id': typeof AdmissionApplicationsIdRoute
+  '/admission/call-center/agents': typeof AdmissionCallCenterAgentsRoute
+  '/admission/call-center/leads': typeof AdmissionCallCenterLeadsRoute
+  '/admission/call-center/my-leads': typeof AdmissionCallCenterMyLeadsRoute
+  '/admission/call-center/reports': typeof AdmissionCallCenterReportsRoute
+  '/admission/call-center/upload': typeof AdmissionCallCenterUploadRoute
+  '/admission/agents': typeof AdmissionAgentsIndexRoute
+  '/admission/call-center': typeof AdmissionCallCenterIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/academic': typeof AcademicRoute
+  '/admin': typeof AdminRoute
+  '/admission': typeof AdmissionRouteWithChildren
+  '/directors': typeof DirectorsRoute
+  '/finance': typeof FinanceRoute
+  '/hr': typeof HrRoute
+  '/marketing': typeof MarketingRoute
+  '/settings': typeof SettingsRoute
+  '/workspace': typeof WorkspaceRoute
+  '/admission/agents': typeof AdmissionAgentsRouteWithChildren
+  '/admission/application': typeof AdmissionApplicationRoute
+  '/admission/applications': typeof AdmissionApplicationsRouteWithChildren
+  '/admission/call-center': typeof AdmissionCallCenterRouteWithChildren
+  '/admission/finance': typeof AdmissionFinanceRoute
+  '/admission/form-builder': typeof AdmissionFormBuilderRoute
+  '/admission/leads': typeof AdmissionLeadsRoute
+  '/admission/': typeof AdmissionIndexRoute
+  '/admission/agents/$id': typeof AdmissionAgentsIdRoute
+  '/admission/applications/$id': typeof AdmissionApplicationsIdRoute
+  '/admission/call-center/agents': typeof AdmissionCallCenterAgentsRoute
+  '/admission/call-center/leads': typeof AdmissionCallCenterLeadsRoute
+  '/admission/call-center/my-leads': typeof AdmissionCallCenterMyLeadsRoute
+  '/admission/call-center/reports': typeof AdmissionCallCenterReportsRoute
+  '/admission/call-center/upload': typeof AdmissionCallCenterUploadRoute
+  '/admission/agents/': typeof AdmissionAgentsIndexRoute
+  '/admission/call-center/': typeof AdmissionCallCenterIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/academic'
+    | '/admin'
+    | '/admission'
+    | '/directors'
+    | '/finance'
+    | '/hr'
+    | '/marketing'
+    | '/settings'
+    | '/workspace'
+    | '/admission/agents'
+    | '/admission/application'
+    | '/admission/applications'
+    | '/admission/call-center'
+    | '/admission/finance'
+    | '/admission/form-builder'
+    | '/admission/leads'
+    | '/admission/'
+    | '/admission/agents/$id'
+    | '/admission/applications/$id'
+    | '/admission/call-center/agents'
+    | '/admission/call-center/leads'
+    | '/admission/call-center/my-leads'
+    | '/admission/call-center/reports'
+    | '/admission/call-center/upload'
+    | '/admission/agents/'
+    | '/admission/call-center/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/academic'
+    | '/admin'
+    | '/directors'
+    | '/finance'
+    | '/hr'
+    | '/marketing'
+    | '/settings'
+    | '/workspace'
+    | '/admission/application'
+    | '/admission/applications'
+    | '/admission/finance'
+    | '/admission/form-builder'
+    | '/admission/leads'
+    | '/admission'
+    | '/admission/agents/$id'
+    | '/admission/applications/$id'
+    | '/admission/call-center/agents'
+    | '/admission/call-center/leads'
+    | '/admission/call-center/my-leads'
+    | '/admission/call-center/reports'
+    | '/admission/call-center/upload'
+    | '/admission/agents'
+    | '/admission/call-center'
+  id:
+    | '__root__'
+    | '/'
+    | '/academic'
+    | '/admin'
+    | '/admission'
+    | '/directors'
+    | '/finance'
+    | '/hr'
+    | '/marketing'
+    | '/settings'
+    | '/workspace'
+    | '/admission/agents'
+    | '/admission/application'
+    | '/admission/applications'
+    | '/admission/call-center'
+    | '/admission/finance'
+    | '/admission/form-builder'
+    | '/admission/leads'
+    | '/admission/'
+    | '/admission/agents/$id'
+    | '/admission/applications/$id'
+    | '/admission/call-center/agents'
+    | '/admission/call-center/leads'
+    | '/admission/call-center/my-leads'
+    | '/admission/call-center/reports'
+    | '/admission/call-center/upload'
+    | '/admission/agents/'
+    | '/admission/call-center/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcademicRoute: typeof AcademicRoute
+  AdminRoute: typeof AdminRoute
+  AdmissionRoute: typeof AdmissionRouteWithChildren
+  DirectorsRoute: typeof DirectorsRoute
+  FinanceRoute: typeof FinanceRoute
+  HrRoute: typeof HrRoute
+  MarketingRoute: typeof MarketingRoute
+  SettingsRoute: typeof SettingsRoute
+  WorkspaceRoute: typeof WorkspaceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +373,276 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/academic': {
+      id: '/academic'
+      path: '/academic'
+      fullPath: '/academic'
+      preLoaderRoute: typeof AcademicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admission': {
+      id: '/admission'
+      path: '/admission'
+      fullPath: '/admission'
+      preLoaderRoute: typeof AdmissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/directors': {
+      id: '/directors'
+      path: '/directors'
+      fullPath: '/directors'
+      preLoaderRoute: typeof DirectorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hr': {
+      id: '/hr'
+      path: '/hr'
+      fullPath: '/hr'
+      preLoaderRoute: typeof HrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing': {
+      id: '/marketing'
+      path: '/marketing'
+      fullPath: '/marketing'
+      preLoaderRoute: typeof MarketingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/workspace': {
+      id: '/workspace'
+      path: '/workspace'
+      fullPath: '/workspace'
+      preLoaderRoute: typeof WorkspaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admission/': {
+      id: '/admission/'
+      path: '/'
+      fullPath: '/admission/'
+      preLoaderRoute: typeof AdmissionIndexRouteImport
+      parentRoute: typeof AdmissionRoute
+    }
+    '/admission/agents': {
+      id: '/admission/agents'
+      path: '/agents'
+      fullPath: '/admission/agents'
+      preLoaderRoute: typeof AdmissionAgentsRouteImport
+      parentRoute: typeof AdmissionRoute
+    }
+    '/admission/application': {
+      id: '/admission/application'
+      path: '/application'
+      fullPath: '/admission/application'
+      preLoaderRoute: typeof AdmissionApplicationRouteImport
+      parentRoute: typeof AdmissionRoute
+    }
+    '/admission/applications': {
+      id: '/admission/applications'
+      path: '/applications'
+      fullPath: '/admission/applications'
+      preLoaderRoute: typeof AdmissionApplicationsRouteImport
+      parentRoute: typeof AdmissionRoute
+    }
+    '/admission/call-center': {
+      id: '/admission/call-center'
+      path: '/call-center'
+      fullPath: '/admission/call-center'
+      preLoaderRoute: typeof AdmissionCallCenterRouteImport
+      parentRoute: typeof AdmissionRoute
+    }
+    '/admission/finance': {
+      id: '/admission/finance'
+      path: '/finance'
+      fullPath: '/admission/finance'
+      preLoaderRoute: typeof AdmissionFinanceRouteImport
+      parentRoute: typeof AdmissionRoute
+    }
+    '/admission/form-builder': {
+      id: '/admission/form-builder'
+      path: '/form-builder'
+      fullPath: '/admission/form-builder'
+      preLoaderRoute: typeof AdmissionFormBuilderRouteImport
+      parentRoute: typeof AdmissionRoute
+    }
+    '/admission/leads': {
+      id: '/admission/leads'
+      path: '/leads'
+      fullPath: '/admission/leads'
+      preLoaderRoute: typeof AdmissionLeadsRouteImport
+      parentRoute: typeof AdmissionRoute
+    }
+    '/admission/agents/': {
+      id: '/admission/agents/'
+      path: '/'
+      fullPath: '/admission/agents/'
+      preLoaderRoute: typeof AdmissionAgentsIndexRouteImport
+      parentRoute: typeof AdmissionAgentsRoute
+    }
+    '/admission/agents/$id': {
+      id: '/admission/agents/$id'
+      path: '/$id'
+      fullPath: '/admission/agents/$id'
+      preLoaderRoute: typeof AdmissionAgentsIdRouteImport
+      parentRoute: typeof AdmissionAgentsRoute
+    }
+    '/admission/applications/$id': {
+      id: '/admission/applications/$id'
+      path: '/$id'
+      fullPath: '/admission/applications/$id'
+      preLoaderRoute: typeof AdmissionApplicationsIdRouteImport
+      parentRoute: typeof AdmissionApplicationsRoute
+    }
+    '/admission/call-center/': {
+      id: '/admission/call-center/'
+      path: '/'
+      fullPath: '/admission/call-center/'
+      preLoaderRoute: typeof AdmissionCallCenterIndexRouteImport
+      parentRoute: typeof AdmissionCallCenterRoute
+    }
+    '/admission/call-center/agents': {
+      id: '/admission/call-center/agents'
+      path: '/agents'
+      fullPath: '/admission/call-center/agents'
+      preLoaderRoute: typeof AdmissionCallCenterAgentsRouteImport
+      parentRoute: typeof AdmissionCallCenterRoute
+    }
+    '/admission/call-center/leads': {
+      id: '/admission/call-center/leads'
+      path: '/leads'
+      fullPath: '/admission/call-center/leads'
+      preLoaderRoute: typeof AdmissionCallCenterLeadsRouteImport
+      parentRoute: typeof AdmissionCallCenterRoute
+    }
+    '/admission/call-center/my-leads': {
+      id: '/admission/call-center/my-leads'
+      path: '/my-leads'
+      fullPath: '/admission/call-center/my-leads'
+      preLoaderRoute: typeof AdmissionCallCenterMyLeadsRouteImport
+      parentRoute: typeof AdmissionCallCenterRoute
+    }
+    '/admission/call-center/reports': {
+      id: '/admission/call-center/reports'
+      path: '/reports'
+      fullPath: '/admission/call-center/reports'
+      preLoaderRoute: typeof AdmissionCallCenterReportsRouteImport
+      parentRoute: typeof AdmissionCallCenterRoute
+    }
+    '/admission/call-center/upload': {
+      id: '/admission/call-center/upload'
+      path: '/upload'
+      fullPath: '/admission/call-center/upload'
+      preLoaderRoute: typeof AdmissionCallCenterUploadRouteImport
+      parentRoute: typeof AdmissionCallCenterRoute
+    }
   }
 }
 
+interface AdmissionAgentsRouteChildren {
+  AdmissionAgentsIdRoute: typeof AdmissionAgentsIdRoute
+  AdmissionAgentsIndexRoute: typeof AdmissionAgentsIndexRoute
+}
+
+const AdmissionAgentsRouteChildren: AdmissionAgentsRouteChildren = {
+  AdmissionAgentsIdRoute: AdmissionAgentsIdRoute,
+  AdmissionAgentsIndexRoute: AdmissionAgentsIndexRoute,
+}
+
+const AdmissionAgentsRouteWithChildren = AdmissionAgentsRoute._addFileChildren(
+  AdmissionAgentsRouteChildren,
+)
+
+interface AdmissionApplicationsRouteChildren {
+  AdmissionApplicationsIdRoute: typeof AdmissionApplicationsIdRoute
+}
+
+const AdmissionApplicationsRouteChildren: AdmissionApplicationsRouteChildren = {
+  AdmissionApplicationsIdRoute: AdmissionApplicationsIdRoute,
+}
+
+const AdmissionApplicationsRouteWithChildren =
+  AdmissionApplicationsRoute._addFileChildren(
+    AdmissionApplicationsRouteChildren,
+  )
+
+interface AdmissionCallCenterRouteChildren {
+  AdmissionCallCenterAgentsRoute: typeof AdmissionCallCenterAgentsRoute
+  AdmissionCallCenterLeadsRoute: typeof AdmissionCallCenterLeadsRoute
+  AdmissionCallCenterMyLeadsRoute: typeof AdmissionCallCenterMyLeadsRoute
+  AdmissionCallCenterReportsRoute: typeof AdmissionCallCenterReportsRoute
+  AdmissionCallCenterUploadRoute: typeof AdmissionCallCenterUploadRoute
+  AdmissionCallCenterIndexRoute: typeof AdmissionCallCenterIndexRoute
+}
+
+const AdmissionCallCenterRouteChildren: AdmissionCallCenterRouteChildren = {
+  AdmissionCallCenterAgentsRoute: AdmissionCallCenterAgentsRoute,
+  AdmissionCallCenterLeadsRoute: AdmissionCallCenterLeadsRoute,
+  AdmissionCallCenterMyLeadsRoute: AdmissionCallCenterMyLeadsRoute,
+  AdmissionCallCenterReportsRoute: AdmissionCallCenterReportsRoute,
+  AdmissionCallCenterUploadRoute: AdmissionCallCenterUploadRoute,
+  AdmissionCallCenterIndexRoute: AdmissionCallCenterIndexRoute,
+}
+
+const AdmissionCallCenterRouteWithChildren =
+  AdmissionCallCenterRoute._addFileChildren(AdmissionCallCenterRouteChildren)
+
+interface AdmissionRouteChildren {
+  AdmissionAgentsRoute: typeof AdmissionAgentsRouteWithChildren
+  AdmissionApplicationRoute: typeof AdmissionApplicationRoute
+  AdmissionApplicationsRoute: typeof AdmissionApplicationsRouteWithChildren
+  AdmissionCallCenterRoute: typeof AdmissionCallCenterRouteWithChildren
+  AdmissionFinanceRoute: typeof AdmissionFinanceRoute
+  AdmissionFormBuilderRoute: typeof AdmissionFormBuilderRoute
+  AdmissionLeadsRoute: typeof AdmissionLeadsRoute
+  AdmissionIndexRoute: typeof AdmissionIndexRoute
+}
+
+const AdmissionRouteChildren: AdmissionRouteChildren = {
+  AdmissionAgentsRoute: AdmissionAgentsRouteWithChildren,
+  AdmissionApplicationRoute: AdmissionApplicationRoute,
+  AdmissionApplicationsRoute: AdmissionApplicationsRouteWithChildren,
+  AdmissionCallCenterRoute: AdmissionCallCenterRouteWithChildren,
+  AdmissionFinanceRoute: AdmissionFinanceRoute,
+  AdmissionFormBuilderRoute: AdmissionFormBuilderRoute,
+  AdmissionLeadsRoute: AdmissionLeadsRoute,
+  AdmissionIndexRoute: AdmissionIndexRoute,
+}
+
+const AdmissionRouteWithChildren = AdmissionRoute._addFileChildren(
+  AdmissionRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcademicRoute: AcademicRoute,
+  AdminRoute: AdminRoute,
+  AdmissionRoute: AdmissionRouteWithChildren,
+  DirectorsRoute: DirectorsRoute,
+  FinanceRoute: FinanceRoute,
+  HrRoute: HrRoute,
+  MarketingRoute: MarketingRoute,
+  SettingsRoute: SettingsRoute,
+  WorkspaceRoute: WorkspaceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

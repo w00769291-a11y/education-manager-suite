@@ -1,0 +1,12 @@
+{
+  "source": "github",
+  "repository": "https://github.com/ibeautybloom-sudo/education-manager-suite.git",
+  "capabilities": [
+    {"capability": "code", "source": "education-manager-suite", "outcome": "copied into project", "status": "verified", "next_action": null},
+    {"capability": "schema", "source": "none (frontend-only, state kept in localStorage)", "outcome": "nothing to migrate", "status": "verified", "next_action": null},
+    {"capability": "records", "source": "none", "outcome": "nothing to migrate", "status": "verified", "next_action": null},
+    {"capability": "auth", "source": "none", "outcome": "nothing to migrate", "status": "verified", "next_action": null},
+    {"capability": "external providers", "source": "none detected", "outcome": "nothing to preserve", "status": "verified", "next_action": null},
+    {"capability": "verification", "source": "routing tests + browser check of all 8 top-level routes", "outcome": "all routes render, no page errors", "status": "verified", "next_action": null}
+  ]
+}

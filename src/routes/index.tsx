@@ -1,24 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ModulePage } from "@/components/AppShell";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Dashboard — Manager Edu" },
+      { name: "description", content: "Manager Edu dashboard module for schools." },
+      { property: "og:title", content: "Dashboard — Manager Edu" },
+      { property: "og:description", content: "Manager Edu dashboard module for schools." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
+  component: DashboardPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+function DashboardPage() {
+  return <ModulePage title="Dashboard" stats={[["Total Students", "2,480", "+4.2% this term"], ["Staff", "186"], ["Fees Collected", "₹48.2L", "82% of target"], ["New Enquiries", "134", "This week"]] as [string, string, string?][]} panels={[{"title": "Recent Activity", "rows": [["Fee paid — Aarav S. (Gr 8)", "10 min ago"], ["Admission approved — Diya K.", "1 hr ago"], ["Exam schedule published", "3 hr ago"]]}, {"title": "Upcoming", "rows": [["Parent-teacher meeting", "Nov 4"], ["Mid-term exams", "Nov 12"], ["Annual day", "Dec 18"]]}] as { title: string; rows: [string, string][] }[]} />;
 }
